@@ -20,7 +20,6 @@ otaDirURL: Let it know where to find MY new software.
 otaBinFilename: What's the name of MY new software?
 otaCheck.php:
 
-filename: 
-What's the name of MY new software? (Same as otaBinFilename.)
-3. Let the Magic Begin:
-Now, I'll do some simple coding magic and create a special file. I'll upload this file and MY new software to the server. That's it!
+filename: What's the name of MY new software? (Same as otaBinFilename.)
+
+3. Let the Magic Begin: Now, I'll do some simple coding magic and create a special file. I'll upload this file and MY new software to the server. That's it!
