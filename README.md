@@ -1,5 +1,5 @@
 # Automatic-OTA-Updates-ESP32
-Recently, I received a request to make it easy for ME to update the firmware on MY ESP32. So, I thought about it and created a cool system. Now, when MY ESP32 turns on, it checks if there's a newer version of the software on the server. If there is, it updates itself and then gets back to work. No stress, no fuss!
+My senior Mohammad Ashrafuzzaman vai wanted an effortless way for ME to update the firmware on our ESP32 devices. I took on the challenge and crafted a cool system. When any ESP32 under my care turns on, it checks if there's a newer version of the software on the server. If there is, it updates itself and then gets back to work. No stress, no fuss!
 🧙 # What I Needed:
 To make this magic happen, I wanted to compare the times when files were made on the server. But guess what? I couldn't find a ready-made solution! So, I crafted a little tool in PHP to do the job.
 
