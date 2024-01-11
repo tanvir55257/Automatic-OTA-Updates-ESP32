@@ -1,3 +1,9 @@
+/*****************************************************************************
+  @ Module: ESP32 OTA basic source.
+  @ Hardware   : ESP32 Devkit v1
+  @ Language: Arduino compatible
+By MD Tanvir Shakil
+*****************************************************************************/
 #include <stdio.h>
 #include <string.h>
 #include <WiFi.h>
@@ -10,15 +16,15 @@
 
 long cv = 210519 ;
 
-#define WIFI_CONNECT_SSID ""        // To edit for your own code.
-#define WIFI_CONNECT_PSWD ""        // To edit for your own code.
+#define WIFI_CONNECT_SSID ""        // Wifi
+#define WIFI_CONNECT_PSWD ""        // Wifi you can use wifi manager for more simplicity
 #define WIFI_CONNECT_WAIT_TIME  500
 #define WIFI_CONNECT_WAIT_LIMIT 20
 WiFiMulti wm ;
 
-String otaDirURL      = "http://SERVER_ADDRESS/DIRECTORY/" ; // To edit for your own code.
+String otaDirURL      = "http://SERVER_ADDRESS/DIRECTORY/" ; // Server address for firmware
 String otaCheckURL    = otaDirURL + "otaCheck.php" ;
-String otaBinFilename = "YOUR_BINARY_FILE" ;                 // To edit for your own code.
+String otaBinFilename = "YOUR_BINARY_FILE" ;                 // firmware name
 String otaBinURL      = otaDirURL + otaBinFilename ;
 
 #define EEPROM_ID_STR      "OTA_BASIC"
