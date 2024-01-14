@@ -10,8 +10,8 @@
 
 long cv = 210519 ;
 
-#define WIFI_CONNECT_SSID ""        // Wifi
-#define WIFI_CONNECT_PSWD ""        // Wifi you can use wifi manager for more simplicity
+#define WIFI_CONNECT_SSID "tanvir"        // Wifi
+#define WIFI_CONNECT_PSWD "12345678"        // Wifi you can use wifi manager for more simplicity
 #define WIFI_CONNECT_WAIT_TIME  500
 #define WIFI_CONNECT_WAIT_LIMIT 20
 WiFiMulti wm ;
@@ -21,7 +21,7 @@ String otaCheckURL    = otaDirURL + "ota.php" ;
 String otaBinFilename = "firmware" ;                 // firmware name
 String otaBinURL      = otaDirURL + otaBinFilename ;
 
-#define EEPROM_ID_STR      "OTA_BASIC"
+#define EEPROM_ID_STR      "OTA"
 #define EEPROM_ID_STR_SIZE 10
 #define EEPROM_SIZE        (EEPROM_ID_STR_SIZE + sizeof(cv))
 
