@@ -1,9 +1,3 @@
-/*****************************************************************************
-  @ Module: ESP32 OTA basic source.
-  @ Hardware   : ESP32 Devkit v1
-  @ Language: Arduino compatible
-By MD Tanvir Shakil
-*****************************************************************************/
 #include <stdio.h>
 #include <string.h>
 #include <WiFi.h>
@@ -22,9 +16,9 @@ long cv = 210519 ;
 #define WIFI_CONNECT_WAIT_LIMIT 20
 WiFiMulti wm ;
 
-String otaDirURL      = "http://SERVER_ADDRESS/DIRECTORY/" ; // Server address for firmware
-String otaCheckURL    = otaDirURL + "otaCheck.php" ;
-String otaBinFilename = "YOUR_BINARY_FILE" ;                 // firmware name
+String otaDirURL      = "server address" ; // Server address for firmware
+String otaCheckURL    = otaDirURL + "ota.php" ;
+String otaBinFilename = "firmware" ;                 // firmware name
 String otaBinURL      = otaDirURL + otaBinFilename ;
 
 #define EEPROM_ID_STR      "OTA_BASIC"
@@ -44,8 +38,6 @@ void Connect2Network()
   WiFi.setAutoConnect(true) ;
   WiFi.setAutoReconnect(true) ;
   WiFi.mode(WIFI_STA) ;
-
-  Serial.println("--------------------------------------------------") ;
   Serial.printf("Try connecting to WiFi with SSID '%s'\n", WIFI_CONNECT_SSID) ;
 
   wm.addAP(WIFI_CONNECT_SSID, WIFI_CONNECT_PSWD) ;
@@ -99,13 +91,8 @@ void OTA_Update(void)
   http.begin(otaCheckURL) ;
   hrc = http.GET() ;
   if (hrc > 0) {
-    Serial.print("HTTP Response code : ") ;
     Serial.println(hrc) ;
     nv = http.getString().toInt() ;
-    Serial.print("Current version : ") ;
-    Serial.println(cv) ;
-    Serial.print("    New version : ") ;
-    Serial.println(nv) ;
   } else {
     Serial.print("Error code : ") ;
     Serial.println(hrc) ;
@@ -113,21 +100,18 @@ void OTA_Update(void)
   http.end() ;
   if (hrc <= 0) return ;
   if (nv > cv) { // New version
-    Serial.println("OTA Updating...") ;
+//Start OTA update
     httpUpdate.rebootOnUpdate(false) ;
     hur = httpUpdate.update(otaClient, otaBinURL) ;
     switch (hur) {
       case HTTP_UPDATE_FAILED :
-        Serial.printf("HTTP_UPDATE_FAILED Error (%d): %s\n\n",
-         httpUpdate.getLastError(), httpUpdate.getLastErrorString().c_str()) ;
+        Serial.printf("HTTP_UPDATE_FAILED Error (%d): %s\n\n",httpUpdate.getLastError(), httpUpdate.getLastErrorString().c_str()) ;
         break ;
       case HTTP_UPDATE_NO_UPDATES :
-        Serial.println("HTTP_UPDATE_NO_UPDATES\n") ;
         break ;
       case HTTP_UPDATE_OK :
         cv = nv ;
         EEPROM_WriteData() ;
-        Serial.println("HTTP_UPDATE_OK\n") ;
         ReSet() ;
         break ;
     }
@@ -137,17 +121,12 @@ void OTA_Update(void)
 void setup()
 {
   Serial.begin(115200) ;
-  Serial.println("\n<<< ESP32 OTA basic - Booting >>>");
-
   EEPROM.begin(EEPROM_SIZE) ;
   EEPROM_WriteData() ;
 
   Connect2Network() ;
   OTA_Update() ;
 
-//
-// You can add your own code from here.
-//
 }
 
 void loop()
